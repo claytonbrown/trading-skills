@@ -100,7 +100,7 @@ Every algorithm is grounded in peer-reviewed research from quantitative finance,
 
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
-| POST | /api/skill/register | No | Register & get API key |
+| POST | /api/skill/register | No | **Deprecated** — returns `signup_required`; get keys at /mcp-signup |
 | GET | /api/skill/signals | API key | List signals (active/verified/all) |
 | GET | /api/skill/signals/:id | API key | Single signal detail |
 | GET | /api/skill/stats | API key | Performance statistics |
