@@ -54,22 +54,18 @@ claude mcp add --transport http trading-signals https://signals.x70.ai/mcp \
 
 ## MCP Server (Native Tool Integration)
 
-For Claude Desktop, Claude Code, or Cursor — add as an MCP server for native tool access (no curl needed):
+For Claude, Cursor, Codex or VS Code — add as an MCP server for native tool access (no curl needed):
 
 ```
 MCP endpoint: https://signals.x70.ai/mcp
 Transport: Streamable HTTP (POST)
-Tools: register, get_signals, get_signal, get_signal_history, get_stats
+Tools: get_signals, get_signal, get_signal_history, get_stats
+Auth (optional): X-Api-Key header, Authorization: Bearer, or ?apiKey= in the URL
 ```
 
-Claude Desktop config:
-```json
-{
-  "mcpServers": {
-    "trading-signals": { "url": "https://signals.x70.ai/mcp" }
-  }
-}
-```
+- Claude Code: `claude mcp add --transport http trading-signals https://signals.x70.ai/mcp`
+- Claude app (Desktop & claude.ai): Customize → Connectors → Add custom connector with the endpoint URL (connectors have no header field — append `?apiKey=YOUR_KEY` for the full feed)
+- Cursor / VS Code / Codex: see the per-client setup on https://signals.x70.ai/dashboard/mcp-key
 
 ## Recommended Workflow
 

@@ -24,25 +24,42 @@ Live crypto trading signals for Claude Code, OpenAI Codex, Cursor, Windsurf & 30
 npx skills add roman-rr/trading-skills
 ```
 
-### MCP Server (Claude Desktop / Claude Code / Cursor)
+### MCP Server (Claude, Cursor, Codex, VS Code)
+
+Works without a key (3-signal preview). For the full feed, get a free key at https://signals.x70.ai/mcp-signup — the [API Key page](https://signals.x70.ai/dashboard/mcp-key) has copy-paste setup for every client.
+
+**Claude Code**
 
 ```bash
-claude mcp add trading-signals --transport http -- https://signals.x70.ai/mcp
+claude mcp add --transport http trading-signals https://signals.x70.ai/mcp
+# with a key:
+claude mcp add --transport http trading-signals https://signals.x70.ai/mcp --header "X-Api-Key: YOUR_KEY"
 ```
 
-Or add to Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json`):
+**Claude app (Desktop & claude.ai)** — Customize → Connectors → *Add custom connector*, URL `https://signals.x70.ai/mcp`. Connectors have no header field, so with a key use `https://signals.x70.ai/mcp?apiKey=YOUR_KEY`.
+
+**Cursor** (`~/.cursor/mcp.json`)
 
 ```json
 {
   "mcpServers": {
     "trading-signals": {
-      "url": "https://signals.x70.ai/mcp"
+      "url": "https://signals.x70.ai/mcp",
+      "headers": { "X-Api-Key": "YOUR_KEY" }
     }
   }
 }
 ```
 
-Exposes 5 tools: `register`, `get_signals`, `get_signal`, `get_signal_history`, `get_stats`.
+**Codex** (`~/.codex/config.toml`, key in env var `SIGNALS_API_KEY`)
+
+```toml
+[mcp_servers.trading-signals]
+url = "https://signals.x70.ai/mcp"
+bearer_token_env_var = "SIGNALS_API_KEY"
+```
+
+Tools: `get_signals`, `get_signal`, `get_signal_history`, `get_stats` (`register` is deprecated — keys come from the dashboard).
 
 ### OpenAI Codex CLI
 
